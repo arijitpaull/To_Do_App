@@ -94,7 +94,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                     context: context,
                     initialDate: _dueDate,
                     firstDate: DateTime.now(),
-                    lastDate: DateTime(2101),
+                    lastDate: DateTime.now().add(const Duration(days: 365)),
                   );
                   if (picked != null && picked != _dueDate)
                     setState(() {

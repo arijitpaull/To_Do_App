@@ -355,7 +355,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final DateTime dueDate = task.dueDate;
     
     if (dueDate.isAfter(now)) {
-      // Schedule notification for 1 day before due date
       await widget.flutterLocalNotificationsPlugin.zonedSchedule(
         0,
         'Your task "${task.title}" is due tomorrow',
@@ -375,7 +374,6 @@ class _HomeScreenState extends State<HomeScreen> {
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       );
 
-      // Schedule notification for the day of due date
       await widget.flutterLocalNotificationsPlugin.zonedSchedule(
         0,
         'Your task "${task.title}" is due today',
