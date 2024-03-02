@@ -1,0 +1,3 @@
+*.cpp linguist-detectable=false
+*.dart linguist-detectable=true
+CMakeLists.txt linguist-detectable=false
