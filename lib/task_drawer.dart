@@ -49,7 +49,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
         padding: MediaQuery.of(context).viewInsets,
         child: Material(
           color:  const Color.fromARGB(255, 33, 33, 33),
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           child: Container(
               margin: const EdgeInsets.only(top: 40,left: 16,right: 16, bottom: 20),
               child: Column(

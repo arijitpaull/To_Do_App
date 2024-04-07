@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo/home_screen.dart';
+import 'package:GIOW/home_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:todo/splash_screen.dart';
+import 'package:GIOW/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

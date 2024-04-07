@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo/task.dart';
-import 'package:todo/task_drawer.dart';
+import 'package:GIOW/task.dart';
+import 'package:GIOW/task_drawer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
   
