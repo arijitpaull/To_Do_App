@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               } else {
                 
-                tasks.add(editedTask);
+                tasks.insert(0, editedTask); 
               }
               filteredTasks = tasks; 
             });
@@ -264,6 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListTile(
 
       title: Text(option.toString().split('.').last),
+      
       onTap: () {
         setState(() {
           _selectedFilterOption = option;
@@ -299,6 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _applyFilter() {
     if (_selectedFilterOption == FilterOption.All) {
+      tasks.sort((a, b) => b.createdDate.compareTo(a.createdDate));
       filteredTasks = tasks;
     } else {
       filteredTasks = tasks.where((task) => task.priority == _selectedFilterOption.toString().split('.').last).toList();
