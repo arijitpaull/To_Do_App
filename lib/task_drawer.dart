@@ -46,10 +46,10 @@ class _TaskDrawerState extends State<TaskDrawer> {
         FocusScope.of(context).unfocus();
       },
       child: SingleChildScrollView(
-        
+        padding: MediaQuery.of(context).viewInsets,
         child: Material(
           color:  const Color.fromARGB(255, 33, 33, 33),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           child: Container(
               margin: const EdgeInsets.only(top: 40,left: 16,right: 16, bottom: 20),
               child: Column(
