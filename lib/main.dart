@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/home_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:todo/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +16,7 @@ void main() async{
       InitializationSettings(
           android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  await Future.delayed(const Duration(seconds: 2));
   runApp(MyApp(flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin));
 }
 
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'To Do',
-      home: HomeScreen( flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,),
+      title: 'GIOW',
+      home: const SplashScreen(),
+      routes: {'/home':(BuildContext context)=>HomeScreen(flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin)}
     );
   }
 }

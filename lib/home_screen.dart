@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todo/task.dart';
 import 'package:todo/task_drawer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -74,17 +73,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 1, 1, 1),
       appBar: AppBar(
-        title: Text('To Do'),
+        backgroundColor: const Color.fromARGB(255, 1, 1, 1),
+        titleTextStyle: const TextStyle(fontSize: 35),
+        title: Text('GIOW', style: GoogleFonts.sixCaps(color: Colors.amber, fontWeight: FontWeight.w900,),),
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_list),
+            icon: const Icon(Icons.filter_list, color: Colors.amber,),
             onPressed: () {
               _showFilterOptions(context);
             },
           ),
           IconButton(
-            icon: Icon(Icons.sort),
+            icon: const Icon(Icons.sort, color: Colors.amber),
             onPressed: () {
               _showSortOptions(context);
             },
@@ -96,17 +98,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: const Color.fromARGB(255, 20, 20, 20),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: Icon(Icons.search, color: Colors.amber),
                   hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.white),
                 ),
+                style: const TextStyle(color: Colors.white),
                 onChanged: (value) {
                   setState(() {
                     filteredTasks = tasks
@@ -130,6 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   leading: Checkbox(
                     value: filteredTasks[index].isCompleted,
+                    activeColor: Colors.amber,
+                    checkColor: Colors.black,
                     onChanged: (bool? value) {
                       setState(() {
                         filteredTasks[index].isCompleted = value ?? false;
@@ -139,24 +145,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(
                     filteredTasks[index].title,
                     style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       decoration: filteredTasks[index].isCompleted
                           ? TextDecoration.lineThrough
                           : isExpired? TextDecoration.none : TextDecoration.none,
-                      color: filteredTasks[index].isCompleted ? Colors.grey : isExpired ? Colors.red : Colors.black,
+                      decorationColor: Colors.amber,
+                      decorationThickness: 3,
+                      color: filteredTasks[index].isCompleted ? Colors.amber : isExpired ? Colors.red : Colors.amber,
                     ),
                   ),
                   subtitle: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(filteredTasks[index].priority,style: TextStyle(color: filteredTasks[index].priority=='High'?const Color.fromARGB(255, 135, 36, 29):filteredTasks[index].priority=='Medium'?const Color.fromARGB(255, 151, 139, 35):const Color.fromARGB(255, 46, 105, 48)),),
+                      Text(filteredTasks[index].priority,style: TextStyle(fontWeight: FontWeight.bold ,color: filteredTasks[index].priority=='High'?const Color.fromARGB(255, 135, 36, 29):filteredTasks[index].priority=='Medium'?const Color.fromARGB(255, 151, 139, 35):const Color.fromARGB(255, 46, 105, 48)),),
                       const SizedBox(width: 10,),
                       Text(
                         '${filteredTasks[index].dueDate.day}-${filteredTasks[index].dueDate.month}-${filteredTasks[index].dueDate.year}',
+                        style: const TextStyle(color: Color.fromARGB(255, 255, 221, 120)),
                       ),
                     ],
                   ),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete,color: Colors.amber,),
                     onPressed: () {
                       _deleteTask(filteredTasks[index]);
                     },
@@ -169,9 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print("add");
           _openEditModal(context, null);
         },
+        backgroundColor: Colors.amber,
+        shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),
     );
@@ -209,7 +220,8 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Filter'),
+          backgroundColor: Colors.amber,
+          title: const Text('Filter',style: TextStyle(fontWeight: FontWeight.bold),),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -231,7 +243,8 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Sort'),
+          backgroundColor: Colors.amber,
+          title: const Text('Sort',style: TextStyle(fontWeight: FontWeight.bold)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -249,6 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildFilterOption(FilterOption option) {
     return ListTile(
+
       title: Text(option.toString().split('.').last),
       onTap: () {
         setState(() {
