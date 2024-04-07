@@ -17,14 +17,14 @@ class SplashScreen extends StatelessWidget {
           children: [
             Text("GIOW",
               style: GoogleFonts.sixCaps(
-                color: Colors.amber,
+                color: const Color.fromARGB(255, 255, 155, 255),
                 fontWeight: FontWeight.w900,
                 fontSize:80
               ),
             ),
             Text("Get It Over With",
               style: GoogleFonts.dmSerifText(
-                color: Colors.amber,
+                color: Color.fromARGB(255, 255, 155, 255),
                 fontWeight: FontWeight.bold,
                 fontSize: 13
               ),

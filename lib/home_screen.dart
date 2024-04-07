@@ -77,22 +77,22 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 1, 1, 1),
         titleTextStyle: const TextStyle(fontSize: 35),
-        title: Text('GIOW', style: GoogleFonts.sixCaps(color: Colors.amber, fontWeight: FontWeight.w900,),),
+        title: Text('GIOW', style: GoogleFonts.sixCaps(color: Color.fromARGB(255, 255, 155, 255), fontWeight: FontWeight.w900,),),
         actions: [
           IconButton(
             onPressed: (){
               _resetDefaultOrder();
             }, 
-            icon: const Icon(Icons.restart_alt, color: Colors.amber,)
+            icon: const Icon(Icons.restart_alt, color: Color.fromARGB(255, 255, 155, 255),)
           ),
           IconButton(
-            icon: const Icon(Icons.filter_list, color: Colors.amber,),
+            icon: const Icon(Icons.filter_list, color: Color.fromARGB(255, 255, 155, 255),),
             onPressed: () {
               _showFilterOptions(context);
             },
           ),
           IconButton(
-            icon: const Icon(Icons.sort, color: Colors.amber),
+            icon: const Icon(Icons.sort, color: Color.fromARGB(255, 255, 155, 255)),
             onPressed: () {
               _showSortOptions(context);
             },
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
-                  prefixIcon: Icon(Icons.search, color: Colors.amber),
+                  prefixIcon: Icon(Icons.search, color: Color.fromARGB(255, 255, 155, 255)),
                   hintText: 'Search',
                   hintStyle: TextStyle(color: Colors.white),
                 ),
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   leading: Checkbox(
                     value: filteredTasks[index].isCompleted,
-                    activeColor: Colors.amber,
+                    activeColor: Color.fromARGB(255, 255, 155, 255),
                     checkColor: Colors.black,
                     onChanged: (bool? value) {
                       setState(() {
@@ -155,9 +155,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: filteredTasks[index].isCompleted
                           ? TextDecoration.lineThrough
                           : isExpired? TextDecoration.none : TextDecoration.none,
-                      decorationColor: Colors.amber,
+                      decorationColor: Color.fromARGB(255, 255, 155, 255),
                       decorationThickness: 3,
-                      color: filteredTasks[index].isCompleted ? Colors.amber : isExpired ? Colors.red : Colors.amber,
+                      color: filteredTasks[index].isCompleted ? Color.fromARGB(255, 255, 155, 255) : isExpired ? Colors.orange : Color.fromARGB(255, 255, 155, 255),
                     ),
                   ),
                   subtitle: Row(
@@ -167,12 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(width: 10,),
                       Text(
                         '${filteredTasks[index].dueDate.day}-${filteredTasks[index].dueDate.month}-${filteredTasks[index].dueDate.year}',
-                        style: const TextStyle(color: Color.fromARGB(255, 255, 221, 120)),
+                        style: const TextStyle(color: Color.fromARGB(255, 255, 205, 255)),
                       ),
                     ],
                   ),
                   trailing: IconButton(
-                    icon: const Icon(Icons.delete,color: Colors.amber,),
+                    icon: const Icon(Icons.delete,color: Color.fromARGB(255, 255, 155, 255),),
                     onPressed: () {
                       _deleteTask(filteredTasks[index]);
                     },
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           _openEditModal(context, null);
         },
-        backgroundColor: Colors.amber,
+        backgroundColor: Color.fromARGB(255, 255, 155, 255),
         shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.amber,
+          backgroundColor: Color.fromARGB(255, 255, 155, 255),
           title: const Text('Filter',style: TextStyle(fontWeight: FontWeight.bold),),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.amber,
+          backgroundColor: Color.fromARGB(255, 255, 155, 255),
           title: const Text('Sort',style: TextStyle(fontWeight: FontWeight.bold)),
           content: Column(
             mainAxisSize: MainAxisSize.min,

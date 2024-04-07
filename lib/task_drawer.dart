@@ -60,7 +60,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                     decoration: const InputDecoration(
                       labelText: 'Title', 
                       labelStyle: TextStyle(
-                        color: Colors.amber
+                        color: Color.fromARGB(255, 255, 155, 255)
                       ),
                       contentPadding: EdgeInsets.all(8),
                       border: OutlineInputBorder(),
@@ -72,7 +72,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                     controller: _descriptionController,
                     decoration: const InputDecoration(
                       labelText: 'Description',
-                      labelStyle: TextStyle(color: Colors.amber),
+                      labelStyle: TextStyle(color: Color.fromARGB(255, 255, 155, 255)),
                       contentPadding: EdgeInsets.all(8),
                       border: OutlineInputBorder(),
                     ),
@@ -106,11 +106,11 @@ class _TaskDrawerState extends State<TaskDrawer> {
                         ),
                       );
                     }).toList(),
-                    decoration: const InputDecoration(labelText: 'Priority',labelStyle: TextStyle(color: Colors.amber)),
+                    decoration: const InputDecoration(labelText: 'Priority',labelStyle: TextStyle(color: Color.fromARGB(255, 255, 155, 255))),
                   ),
                   ListTile(
-                    title: const Text('Due-date', style: TextStyle(color: Colors.amber),),
-                    subtitle: Text('${_dueDate.day}/${_dueDate.month}/${_dueDate.year}',style: const TextStyle(color: Color.fromARGB(255, 255, 221, 120)),),
+                    title: const Text('Due-date', style: TextStyle(color: Color.fromARGB(255, 255, 155, 255)),),
+                    subtitle: Text('${_dueDate.day}/${_dueDate.month}/${_dueDate.year}',style: const TextStyle(color: Color.fromARGB(255, 255, 205, 255)),),
                     onTap: () async {
                       final DateTime? picked = await showDatePicker(
                         context: context,
@@ -131,7 +131,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                         onPressed: () {
                           Navigator.pop(context); 
                         },
-                        child: const Text('Cancel',style: TextStyle(color: Colors.amber),),
+                        child: const Text('Cancel',style: TextStyle(color: Color.fromARGB(255, 255, 155, 255)),),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -150,7 +150,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  backgroundColor: Colors.amber,
+                                  backgroundColor: Color.fromARGB(255, 255, 155, 255),
                                   title: const Text('Incomplete'),
                                   content: const Text('Please enter a title.'),
                                   actions: <Widget>[
@@ -159,7 +159,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                                         Navigator.of(context).pop();
                                       },
                                       style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
-                                      child: const Text('Okay',style: TextStyle(color: Colors.amber),),
+                                      child: const Text('Okay',style: TextStyle(color: Color.fromARGB(255, 255, 155, 255)),),
                                     ),
                                   ],
                                 );
@@ -167,7 +167,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
                             );
                           }
                         },
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.amber)),
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 255, 155, 255))),
                         child: const Text('Save',style: TextStyle(color: Colors.black)),
                       ),
                     ],
