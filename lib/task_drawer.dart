@@ -50,7 +50,7 @@ class _TaskDrawerState extends State<TaskDrawer> {
             bottom: MediaQuery.of(context).viewInsets.bottom + 16.0, 
         ),
         child: Container(
-          margin: const EdgeInsets.only(top: 40,left: 16,right: 16),
+          margin: const EdgeInsets.only(top: 40,left: 16,right: 16, bottom: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

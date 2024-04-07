@@ -7,9 +7,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
   
 class HomeScreen extends StatefulWidget {
-  final SharedPreferences prefs;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-  const HomeScreen({super.key, required this.prefs, required this.flutterLocalNotificationsPlugin});
+  const HomeScreen({super.key, required this.flutterLocalNotificationsPlugin});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -20,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Task> filteredTasks = [];
   SortOption _selectedSortOption = SortOption.Due;
   FilterOption _selectedFilterOption = FilterOption.All;
-  SharedPreferences? prefs;
   List<Task> defaultOrder = [];
 
   @override
@@ -66,28 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void initializeTasks() {
     setState(() {
-      tasks = getTasksFromPrefs();
+      tasks = tasks.toList();
       filteredTasks = tasks;
     });
   }
 
-  void saveTasksToPrefs(List<Task> tasks) {
-    List<Map<String, dynamic>> tasksJson =
-        tasks.map((task) => task.toJson()).toList();
-    widget.prefs.setStringList(
-        'tasks', tasksJson.map((task) => jsonEncode(task)).toList());
-  }
-
-  List<Task> getTasksFromPrefs() {
-    List<String>? taskJsonList = widget.prefs.getStringList('tasks');
-    if (taskJsonList != null) {
-      return taskJsonList
-          .map((taskJson) => Task.fromJson(json.decode(taskJson)))
-          .toList();
-    } else {
-      return [];
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               _buildSortOption(SortOption.Due),
               _buildSortOption(SortOption.Priority),
-              _buildSortOption(SortOption.Default),
+  
             ],
           ),
         );
@@ -286,9 +268,6 @@ class _HomeScreenState extends State<HomeScreen> {
       break;
     case SortOption.Priority:
       optionText = 'Priority';
-      break;
-    case SortOption.Default:
-      optionText = 'Default';
       break;
   }
 
@@ -322,11 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         return _priorityToValue(b.priority) - _priorityToValue(a.priority);
       });
-    } else if (_selectedSortOption == SortOption.Default) { 
-      setState(() {
-        filteredTasks = List.from(defaultOrder);
-      });
-    }
+    } 
   }
 
   int _priorityToValue(String priority) {
@@ -396,5 +371,5 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-enum SortOption { Due, Priority, Default }
+enum SortOption { Due, Priority }
 enum FilterOption { All, High, Medium, Low }
