@@ -80,6 +80,12 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('GIOW', style: GoogleFonts.sixCaps(color: Colors.amber, fontWeight: FontWeight.w900,),),
         actions: [
           IconButton(
+            onPressed: (){
+              _resetDefaultOrder();
+            }, 
+            icon: const Icon(Icons.restart_alt, color: Colors.amber,)
+          ),
+          IconButton(
             icon: const Icon(Icons.filter_list, color: Colors.amber,),
             onPressed: () {
               _showFilterOptions(context);
@@ -225,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildFilterOption(FilterOption.All),
+              
               _buildFilterOption(FilterOption.High),
               _buildFilterOption(FilterOption.Medium),
               _buildFilterOption(FilterOption.Low),
@@ -298,13 +304,18 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _resetDefaultOrder() {
+  setState(() {
+    tasks.sort((a, b) => b.createdDate.compareTo(a.createdDate));  // Sort by createdDate in descending order
+    filteredTasks = List.from(tasks);  // Update filteredTasks
+  });
+}
+
+
   void _applyFilter() {
-    if (_selectedFilterOption == FilterOption.All) {
-      tasks.sort((a, b) => b.createdDate.compareTo(a.createdDate));
-      filteredTasks = tasks;
-    } else {
+    
       filteredTasks = tasks.where((task) => task.priority == _selectedFilterOption.toString().split('.').last).toList();
-    }
+    
   }
 
   void _applySort() {
@@ -388,4 +399,4 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 enum SortOption { Due, Priority }
-enum FilterOption { All, High, Medium, Low }
+enum FilterOption {All, High, Medium, Low }
