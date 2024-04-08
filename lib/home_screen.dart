@@ -101,10 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: filteredTasks.isEmpty?
       const Center(
-        child: Text("No items yet",
+        child: Text("No items yet.",
           style: TextStyle(
-            color: Color.fromARGB(255, 20, 20, 20),
-            fontSize: 40,
+            color: Color.fromARGB(255, 50, 50, 50),
+            fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
         )
@@ -259,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color.fromARGB(255, 255, 155, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 155, 255),
           title: const Text('Sort',style: TextStyle(fontWeight: FontWeight.bold)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
