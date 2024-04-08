@@ -16,7 +16,7 @@ void main() async{
       InitializationSettings(
           android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  await Future.delayed(const Duration(seconds: 2));
+  
   runApp(MyApp(flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin));
 }
 

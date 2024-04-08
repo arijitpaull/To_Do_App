@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 1, 1, 1),
         titleTextStyle: const TextStyle(fontSize: 35),
-        title: Text('GIOW', style: GoogleFonts.sixCaps(color: Color.fromARGB(255, 255, 155, 255), fontWeight: FontWeight.w900,),),
+        title: Text('GIOW', style: GoogleFonts.sixCaps(color: const Color.fromARGB(255, 255, 155, 255), fontWeight: FontWeight.w900,),),
         actions: [
           IconButton(
             onPressed: (){
@@ -99,7 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: filteredTasks.isEmpty?
+      const Center(
+        child: Text("No items yet",
+          style: TextStyle(
+            color: Color.fromARGB(255, 20, 20, 20),
+            fontSize: 40,
+            fontWeight: FontWeight.w600,
+          ),
+        )
+      )
+      :Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -140,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   leading: Checkbox(
                     value: filteredTasks[index].isCompleted,
-                    activeColor: Color.fromARGB(255, 255, 155, 255),
+                    activeColor: const Color.fromARGB(255, 255, 155, 255),
                     checkColor: Colors.black,
                     onChanged: (bool? value) {
                       setState(() {
@@ -155,9 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: filteredTasks[index].isCompleted
                           ? TextDecoration.lineThrough
                           : isExpired? TextDecoration.none : TextDecoration.none,
-                      decorationColor: Color.fromARGB(255, 255, 155, 255),
+                      decorationColor: const Color.fromARGB(255, 255, 155, 255),
                       decorationThickness: 3,
-                      color: filteredTasks[index].isCompleted ? Color.fromARGB(255, 255, 155, 255) : isExpired ? Colors.orange : Color.fromARGB(255, 255, 155, 255),
+                      color: filteredTasks[index].isCompleted ? const Color.fromARGB(255, 255, 155, 255) : isExpired ? Colors.orange : Color.fromARGB(255, 255, 155, 255),
                     ),
                   ),
                   subtitle: Row(
@@ -187,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           _openEditModal(context, null);
         },
-        backgroundColor: Color.fromARGB(255, 255, 155, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 155, 255),
         shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),
@@ -226,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color.fromARGB(255, 255, 155, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 155, 255),
           title: const Text('Filter',style: TextStyle(fontWeight: FontWeight.bold),),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -306,8 +316,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _resetDefaultOrder() {
   setState(() {
-    tasks.sort((a, b) => b.createdDate.compareTo(a.createdDate));  // Sort by createdDate in descending order
-    filteredTasks = List.from(tasks);  // Update filteredTasks
+    tasks.sort((a, b) => b.createdDate.compareTo(a.createdDate));  
+    filteredTasks = List.from(tasks);  
   });
 }
 
