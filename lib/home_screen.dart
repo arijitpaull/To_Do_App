@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
       this.tasks = tasks;
       filteredTasks = tasks;
     });
-    print("Tasks loaded from Hive.");
+
   }
 
   
@@ -236,10 +236,9 @@ class _HomeScreenState extends State<HomeScreen> {
             if(task != null){
               final key = editedTask.createdDate.toString();
               _box.put(key, editedTask);
-              print("Tasks updated in Hive.");
             } else {
+              final key = editedTask.createdDate.toString();
               _box.add(editedTask);
-              print("Tasks added in Hive.");
             }
             setState(() {
               if (task != null) {
@@ -389,7 +388,6 @@ class _HomeScreenState extends State<HomeScreen> {
       tasks.remove(task);
       filteredTasks = tasks; 
     });
-    print("Tasks deleted from Hive.");
   }
 
   void _scheduleNotification(Task task) async {
@@ -402,7 +400,7 @@ class _HomeScreenState extends State<HomeScreen> {
         0,
         'Your task "${task.title}" is due tomorrow',
         '',
-        tz.TZDateTime.from(dueDate.subtract(Duration(days: 1)), tz.local).subtract(Duration(hours: 10)),
+        tz.TZDateTime.from(dueDate.subtract(const Duration(days: 1)), tz.local).subtract(const Duration(hours: 10)),
         const NotificationDetails(
           android: AndroidNotificationDetails(
             'channel id',
