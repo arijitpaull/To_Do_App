@@ -86,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
       this.tasks = tasks;
       filteredTasks = tasks;
     });
+    print("Tasks loaded from Hive.");
   }
 
   
@@ -233,10 +234,12 @@ class _HomeScreenState extends State<HomeScreen> {
           task: task,
           onSave: (Task editedTask) {
             if(task != null){
-              
-              _box.put(task, editedTask);
+              final key = editedTask.createdDate.toString();
+              _box.put(key, editedTask);
+              print("Tasks updated in Hive.");
             } else {
               _box.add(editedTask);
+              print("Tasks added in Hive.");
             }
             setState(() {
               if (task != null) {
@@ -386,6 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
       tasks.remove(task);
       filteredTasks = tasks; 
     });
+    print("Tasks deleted from Hive.");
   }
 
   void _scheduleNotification(Task task) async {
