@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: filteredTasks.isEmpty?
       const Center(
-        child: Text("No items yet.",
+        child: Text("No Items",
           style: TextStyle(
             color: Color.fromARGB(255, 30, 30, 30),
             fontSize: 20,
