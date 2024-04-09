@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:GIOW/task.dart';
 import 'package:GIOW/task_drawer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:timezone/timezone.dart' as tz;
   
 class HomeScreen extends StatefulWidget {
@@ -14,19 +16,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   List<Task> tasks = [];
   List<Task> filteredTasks = [];
   SortOption _selectedSortOption = SortOption.Due;
   FilterOption _selectedFilterOption = FilterOption.All;
   List<Task> defaultOrder = [];
+  late Box<Task> _box;
 
   @override
   void initState() {
     super.initState();
+    Hive.initFlutter();
+    _initialiseHive().then((_) {
     initializeTasks();
     _checkExpiredTasks();
     defaultOrder.addAll(tasks);
+  });
   }
+
+ @override
+ void dispose() {
+  _box.close();
+  super.dispose();
+ }
+
+ Future<void> _initialiseHive() async{
+  await Hive.openBox<Task>('tasks').then((box) {
+    _box = box;
+  });
+ }
 
   void resetDefaultOrder() {
     setState(() {
@@ -62,8 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void initializeTasks() {
+    final tasks = _box.values.toList().cast<Task>();
     setState(() {
-      tasks = tasks.toList();
+      this.tasks = tasks;
       filteredTasks = tasks;
     });
   }
@@ -103,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
       const Center(
         child: Text("No items yet.",
           style: TextStyle(
-            color: Color.fromARGB(255, 50, 50, 50),
+            color: Color.fromARGB(255, 30, 30, 30),
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
@@ -212,6 +232,12 @@ class _HomeScreenState extends State<HomeScreen> {
         return TaskDrawer(
           task: task,
           onSave: (Task editedTask) {
+            if(task != null){
+              
+              _box.put(task, editedTask);
+            } else {
+              _box.add(editedTask);
+            }
             setState(() {
               if (task != null) {
                 
@@ -355,6 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _deleteTask(Task task) {
+    _box.delete(task);
     setState(() {
       tasks.remove(task);
       filteredTasks = tasks; 

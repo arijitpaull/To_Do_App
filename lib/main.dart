@@ -3,9 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:GIOW/home_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:GIOW/splash_screen.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   const AndroidInitializationSettings initializationSettingsAndroid =
